@@ -1,3 +1,12 @@
-<x-admin-layout>
+<x-admin-layout 
+title="Dashboard" :breadcrumbs=" [
+  [
+    'name' => 'Dashboard',
+    'href' => route('admin.dashboard'),
+  ],
+  [
+    'name' => 'Ejemplo',
+  ]
+]">
   Hola desde el panel de control del sistema de citas médicas
 </x-admin-layout>
