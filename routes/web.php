@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Admin\RoleController; 
 
 Route::get('/', function () {
     return view('welcome');
@@ -11,7 +12,12 @@ Route::middleware([
     config('jetstream.auth_session'),
     'verified',
 ])->group(function () {
+
     Route::get('/dashboard', function () {
         return view('dashboard');
     })->name('dashboard');
+
+    // RUTAS DE ROLES
+    Route::resource('admin/roles', RoleController::class)
+        ->names('admin.roles');
 });

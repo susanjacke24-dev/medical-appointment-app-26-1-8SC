@@ -11,33 +11,15 @@ $links = [
     ],
 
     [
-        'header' => 'Administración',
+        'header' => 'Gestión',
     ],
 
     [
-        'name' => 'Tienda en línea',
-        'icon' => 'fa-solid fa-store',
-        'submenu' => [
-
-            [
-                'name' => 'Productos',
-                'href' => '#',
-                'active' => request()->routeIs('admin.products.*'),
-            ],
-
-            [
-                'name' => 'Categorías',
-                'href' => '#',
-                'active' => request()->routeIs('admin.categories.*'),
-            ],
-
-            [
-                'name' => 'Pedidos',
-                'href' => '#',
-                'active' => request()->routeIs('admin.orders.*'),
-            ],
-
-        ],
+        'name' => 'Roles y permisos',
+        'icon' => 'fa-solid fa-shield-halved',
+        'href' => route('admin.roles.index'),
+        'active' => request()->routeIs('admin.roles.*')
+        
     ],
 
 ];
@@ -117,23 +99,23 @@ $links = [
                </ul>
 
             {{-- LINK NORMAL --}}
-            @else
+          {{-- LINK NORMAL --}}
+@else
 
-               <a href="{{ $link['href'] }}"
-                  class="flex items-center px-2 py-1.5 text-body rounded-base hover:bg-neutral-tertiary hover:text-fg-brand group
-                  {{ $link['active'] ? 'bg-gray-100 font-semibold' : '' }}">
+<a href="{{ $link['href'] }}"
+   class="flex items-center w-full px-2 py-1.5 text-body rounded-base hover:bg-neutral-tertiary hover:text-fg-brand group
+   {{ $link['active'] ? 'bg-gray-100 font-semibold' : '' }}">
 
-                  <span class="w-6 h-6 inline-flex items-center justify-center text-gray-500">
-                     <i class="{{ $link['icon'] }}"></i>
-                  </span>
+    <span class="w-6 h-6 inline-flex items-center justify-center text-gray-500">
+        <i class="{{ $link['icon'] }}"></i>
+    </span>
 
-                  <span class="ms-3">
-                     {{ $link['name'] }}
-                  </span>
-               </a>
+    <span class="ms-3 whitespace-nowrap">
+        {{ $link['name'] }}
+    </span>
+</a>
 
-            @endisset
-
+@endisset  
          </li>
          @endforeach
 

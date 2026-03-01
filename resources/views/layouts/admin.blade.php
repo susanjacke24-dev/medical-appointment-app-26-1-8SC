@@ -1,6 +1,6 @@
 @props([
-    'title' => config('app.name', 'Laravel'), //Título por defecto
-    'breadcrumbs' => [] //Array vacío por defecto 
+    'title' => config('app.name', 'Vitalia'), 
+    'breadcrumbs' =>[] 
 ])
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
@@ -18,27 +18,54 @@
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
 
-        {{-- WireUI --}}
-        <wireui:scripts />
-
         <!-- Styles -->
         @livewireStyles
-         <script src="https://cdn.jsdelivr.net/npm/flowbite@4.0.1/dist/flowbite.min.js"></script>
+        <script src="https://kit.fontawesome.com/6244811c40.js" crossorigin="anonymous"></script>
+
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+
+        {{-- WireUI --}}
+         <wireui:scripts />
     </head>
-    <body class="font-sans antialiased bd-gray-50">
+    <body class="font-sans antialiased bg-gray-100">
       
 @include('layouts.includes.Admin.navigation')
 @include('layouts.includes.Admin.sidebar')
 
+
 <div class="p-4 sm:ml-64 mt-14">
-   <div Class="mt-14">
-    @include('layouts.includes.admin.breadcrumb')     
-   </div> 
-   {{$slot}}
+   <div class="mt-14 flex justify-between items-center w-full">
+       @include('layouts.includes.Admin.breadcrumb')
+       @isset($action)
+        <div>
+            {{ $action }}
+        </div>
+           
+       @endisset
+   </div>
+    {{ $slot }}
 </div>
 
         @stack('modals')
-
+{{-- Mostrar Sweet Alert --}}
+@if(session('swal'))
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            Swal.fire({
+                icon: "{{ session('swal.icon') }}",
+                title: "{{ session('swal.title') }}",
+                text: "{{ session('swal.text') }}",
+            });
+        });
+    </script>
+@endif
         @livewireScripts
+   
+      @yield('content')
+
+      <script src="https://cdn.jsdelivr.net/npm/flowbite@4.0.1/dist/flowbite.min.js"></script>
+   
+
     </body>
 </html>
