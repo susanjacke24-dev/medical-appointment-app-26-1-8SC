@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\PatientController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\UserController; 
@@ -19,5 +20,8 @@ Route::middleware([
 
     // Gestión de usuarios (en plural por convención)
     Route::resource('users', UserController::class);
+
+    // Gestión de pacientes
+    Route::resource('patients', PatientController::class);
 });
 
