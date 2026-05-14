@@ -33,6 +33,7 @@ class User extends Authenticatable
         'address',
         'phone',
         'id_number',
+        'specialty',
     ];
 
     /**
@@ -73,6 +74,14 @@ class User extends Authenticatable
 
     public function patient(){
         return $this->hasOne(Patient::class);
+    }
+
+    /**
+     * Get the appointments for the doctor.
+     */
+    public function doctorAppointments()
+    {
+        return $this->hasMany(Appointment::class, 'doctor_id');
     }
 
     
